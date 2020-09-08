@@ -21,6 +21,7 @@ function more(e) {
   });
 }
 
+
 $(".close").click(function () {
   // 닫기는 공통
   document.getElementById("password_update").value = "";
@@ -29,7 +30,7 @@ $(".close").click(function () {
   $(".modal").hide();
 });
 
-$("#update").click(function () {
+document.getElementById('update').onclick = function(){
   $.ajax({
     url: "/api/select/confirm",
     type: "POST",
@@ -53,7 +54,8 @@ $("#update").click(function () {
       console.log(err);
     },
   });
-});
+}
+
 
 $(document).ready(function () {
   $.ajax({
@@ -61,7 +63,6 @@ $(document).ready(function () {
     type: "GET",
     contentType: "application/x-www-form-urlencoded; charset=UTF-8",
     success: function (data) {
-      console.log(data);
       list(data);
     },
     error: function (err) {
@@ -71,8 +72,8 @@ $(document).ready(function () {
 });
 
 function list(datalist) {
+  console.log(datalist)
   for (var i in datalist) {
-    console.log(datalist);
     var result = Math.floor(Math.random() * 23) + 1;
     var _tr =
       '<article class="item">\n' +
@@ -95,13 +96,13 @@ function list(datalist) {
   }
 }
 
-$("#delete").click(function () {
+document.getElementById("delete").onclick = function () {
   $.ajax({
     url: "/api/delete",
     type: "DELETE",
     data: {
-      password: $("#password_update").val(),
-      idx: document.getElementById("modify").getAttribute("idx"),
+      password: document.getElementById("password_update").value,
+      idx: document.getElementById("modify").getAttribute("idx")
     },
     contentType: "application/x-www-form-urlencoded; charset=UTF-8",
     success: function (data) {
@@ -110,18 +111,18 @@ $("#delete").click(function () {
     error: function (err) {
       console.log(err);
     },
-  });
-});
+  })
+}
 
 $("#writer").click(function () {
   $.ajax({
     url: "/api/insert",
     type: "POST",
-    data: {
-      name: $("#name_writer").val(),
-      title: $("#title_writer").val(),
-      content: $("#content_writer").val(),
-      password: $("#password_write").val(),
+    data: { 
+      name: document.getElementById("name_writer").value,
+      title: document.getElementById("title_writer").value,
+      content: document.getElementById("content_writer").value,
+      password: document.getElementById("password_write").value
     },
     success: function (data) {
       console.log(data);
@@ -139,9 +140,9 @@ $("#update_btn").click(function () {
     type: "PUT",
     data: {
       idx: document.getElementById("modi_idx").getAttribute("idx"),
-      name: $("#name_modi").val(),
-      title: $("#title_modi").val(),
-      content: $("#content_modi").val(),
+      name: document.getElementById("name_modi").value,
+      title: document.getElementById("title_modi").value,
+      content: document.getElementById("content_modi").value
     },
     success: function (data) {
       // console.log(data)

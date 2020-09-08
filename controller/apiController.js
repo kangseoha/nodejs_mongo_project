@@ -3,6 +3,7 @@ var api = express.Router();
 const Board = require('../models/board')
 
 api.get('/select', async (req, res, next) => {
+    console.log(req.query)
     if(req.query.idx){
         Board.findOne({idx : req.query.idx},(err,board) =>{
             if(err) return res.status(500).send({error : 'fail'});

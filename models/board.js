@@ -3,6 +3,9 @@ var autoIncrement = require("mongoose-auto-increment");
 autoIncrement.initialize(mongoose);
 
 const boardSchma = mongoose.Schema({
+  idx : {
+    type :Number
+  },
   name: {
     type: String,
   },
@@ -16,6 +19,8 @@ const boardSchma = mongoose.Schema({
     type: String,
   },
 });
+
+boardSchma.plugin(autoIncrement.plugin,{ model : 'Board', field : 'idx', startAt : 1 });
 
 module.exports = mongoose.model("Board", boardSchma);
 
